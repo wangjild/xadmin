@@ -42,6 +42,13 @@ $(document).ready(function(){
                     previousPoint = null;
                 }
             });
+
+            $chart.bind("plotclick", function (event, pos, item) {
+              if (item) {
+                window.open(item.series.data[item.dataIndex][2], '_blank');
+              }
+            });
+
             $chart.data('chart-obj', chart);
         });
       })

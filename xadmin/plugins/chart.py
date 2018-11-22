@@ -132,7 +132,8 @@ class ChartsView(ListAdminView):
             xf, attrs, value = lookup_field(self.x_field, obj, self)
             for i, yfname in enumerate(self.y_fields):
                 yf, yattrs, yv = lookup_field(yfname, obj, self)
-                datas[i]["data"].append((value, yv))
+                url = self.model_admin_url('change', obj.pk)
+                datas[i]["data"].append((value, yv, url))
 
         option = {'series': {'lines': {'show': True}, 'points': {'show': False}},
                   'grid': {'hoverable': True, 'clickable': True}}
