@@ -127,12 +127,13 @@ class ChartsView(ListAdminView):
             i, self.model, model_admin=self))} for i in self.y_fields]
 
         self.make_result_list()
+        click_name = self.chart.get('option', {}).get('click', 'detail')
 
         for obj in self.result_list:
             xf, attrs, value = lookup_field(self.x_field, obj, self)
             for i, yfname in enumerate(self.y_fields):
                 yf, yattrs, yv = lookup_field(yfname, obj, self)
-                url = self.model_admin_url('change', obj.pk)
+                url = self.model_admin_url(click_name, obj.pk)
                 datas[i]["data"].append((value, yv, url))
 
         option = {'series': {'lines': {'show': True}, 'points': {'show': False}},
